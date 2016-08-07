@@ -59,7 +59,7 @@
             var aCaidan = document.querySelectorAll('.caidan');
             var oCall = document.querySelector('.call');
             var bodyH = document.body.scrollHeight;
-
+            var oTop = document.querySelector('.top1');
             console.log(bodyH);
             // var aCall = oCall.children;
             // console.log(aLieb);
@@ -229,6 +229,12 @@
                         // oFmenu.style.display = 'block';
                     }
                 }
+                if (document.body.scrollHeight > (document.body.scrollTop + document.body.clientHeight + 50)) {
+                    oTop.style.bottom = '5px';
+                } else {
+                    oTop.style.bottom = '55px';
+                }
+
             };
         };
     </script>
@@ -297,7 +303,7 @@
             <ul class="nav clearfix">
                 <li><a href="#about">简历</a></li>
                 <!--target="_blank"-->
-                <li><a href="blog" target="_blank">博客</a></li>
+                <!--<li><a href="blog" target="_blank">博客</a></li>-->
                 <li><a href="#me">关于</a></li>
                 <li><a href="#works">案例</a></li>
                 <li><a href="#contact">联系</a></li>
@@ -307,7 +313,7 @@
         <ul class="lieb">
             <li><a href="#about">简历</a></li>
             <!--target="_blank"-->
-            <li><a href="blog" target="_blank">博客</a></li>
+            <!--<li><a href="blog" target="_blank">博客</a></li>-->
             <li class=""><a href="#me">关于</a></li>
             <li><a href="#works">案例</a></li>
             <li><a href="#contact">联系</a></li>
@@ -325,7 +331,7 @@
                 <ul class="nav clearfix">
                     <li><a href="#about">简历</a></li>
                     <!--target="_blank"-->
-                    <li><a href="blog" target="_blank">博客</a></li>
+                    <!--<li><a href="blog" target="_blank">博客</a></li>-->
                     <li><a href="#me">关于</a></li>
                     <li><a href="#works">案例</a></li>
                     <li><a href="#contact">联系</a></li>
@@ -335,7 +341,7 @@
             <ul class="lieb">
                 <li><a href="#about">简历</a></li>
                 <!--target="_blank"-->
-                <li><a href="blog" target="_blank">博客</a></li>
+                <!--<li><a href="blog" target="_blank">博客</a></li>-->
                 <li class=""><a href="#me">关于</a></li>
                 <li><a href="#works">案例</a></li>
                 <li><a href="#contact">联系</a></li>
@@ -509,7 +515,7 @@
                     </a>
                 </li>
             </ul>
-            <a href="resume.html" target="_blank" class="resume">MORE</a>
+            <!--<a href="resume.html" target="_blank" class="resume">MORE</a>-->
         </div>
 
     </div>
@@ -532,11 +538,9 @@
     </div>
     <footer>
         <p>THANKS</p>
-        <a href="#" class="resume">返回顶部</a>
+        <a href="#" class="resume top1">TOP</a>
     </footer>
-    <div class="bottom">
-
-    </div>
+    <div class="bottom"></div>
 </body>
 
 </html>
