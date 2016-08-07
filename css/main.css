@@ -1,6 +1,8 @@
 html {
     width: 100%;
     height: 100%;
+    /*overflow-x: hidden;*/
+    /*margin-bottom: -15px;*/
 }
 
 body {
@@ -11,6 +13,8 @@ body {
     /*overflow: hidden;*/
     font-size: 10px;
     font-family: '微软雅黑';
+    /*overflow: hidden*/
+    /*margin-bottom: -15px;*/
 }
 
 .ban {
@@ -163,7 +167,7 @@ body {
 
 .menu-content {
     max-width: 1000px;
-    min-width: 500px;
+    /*min-width: 500px;*/
     margin: 0 auto;
     /*position: relative;*/
     -webkit-transition: all 0.2s ease-in;
@@ -482,6 +486,7 @@ body {
 /*works*/
 
 .works {
+    margin-top: 50px;
     width: 100%;
     min-height: 100%;
     position: relative;
@@ -560,7 +565,7 @@ body {
 
 .contact {
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
     position: relative;
     z-index: 1;
     background: #fff;
@@ -569,7 +574,7 @@ body {
 }
 
 .call {
-    width: 425px;
+    width: 400px;
     margin: 80px auto;
 }
 
@@ -586,12 +591,91 @@ body {
 
 .right {
     float: right;
-    width: 169px;
+    width: 170px;
     height: 169px;
 }
 
 .right p {
     float: right;
-    width: 169px;
-    height: 169px;
+    width: 170px;
+    height: 50px;
+    line-height: 25px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    text-align: left;
+    letter-spacing: 1.5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.lieb {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: #ccc;
+    display: none;
+}
+
+.lieb li {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px solid #000;
+}
+
+.lieb li a {
+    width: 100%;
+    height: 100%;
+    line-height: 30px;
+    text-align: center;
+    display: block;
+    color: #fff;
+    font-size: 18px;
+}
+
+.caidan {
+    float: right;
+    width: 50px;
+    height: 50px;
+    background: url(../images/caidan.png) no-repeat center center #000;
+    -webkit-background-size: 25px;
+    -moz-background-size: 25px;
+    -ms-background-size: 25px;
+    -o-background-size: 25px;
+    background-size: 25px;
+    display: none;
+}
+
+footer {
+    width: 100%;
+    height: 100px;
+    position: relative;
+    /*bottom: -15px;*/
+}
+
+footer p {
+    width: 100%;
+    font-size: 18px;
+    height: 50px;
+    color: #fff;
+    letter-spacing: 1px;
+    text-align: center;
+    line-height: 50px;
+    background: #26292E;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.bottom {
+    width: 100%;
+    font-size: 18px;
+    height: 50px;
+    background: #26292E;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: -10;
 }

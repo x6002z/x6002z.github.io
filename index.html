@@ -9,6 +9,35 @@
     <script type="text/javascript" async="" src="js/1.js"></script>
     <!--<script type="text/javascript" async="" src="js/domove.js"></script>-->
     <script>
+        function addWheel(obj, fn) {
+            function fnWheel(ev) {
+                var oEvent = ev || event;
+                var down = false;
+                //2判断滚轮方向
+                if (oEvent.wheelDelta) {
+                    //下
+                    if (oEvent.wheelDelta < 0) {
+                        down = true;
+                    } else {
+                        down = false;
+                    }
+
+                } else {
+                    //下
+                    if (oEvent.detail > 0) {
+                        down = true;
+                    } else {
+                        down = false;
+                    }
+                }
+                //3根据方向down干事儿
+                fn(down);
+            }
+            //1.滚轮事件兼容
+            obj.onmousewheel = fnWheel; //IE chrome
+            obj.addEventListener && obj.addEventListener('DOMMouseScroll', fnWheel, false); //FF
+        }
+
         window.onload = function() {
             var oLoad = document.getElementById('loading');
             oLoad.style.display = 'none';
@@ -16,7 +45,6 @@
             var oHead = document.getElementById('head');
             var oFmenu = document.getElementById('fmenu');
             var oAbout = document.getElementById('about');
-
             var oMe = document.getElementById('me');
             var aCase = document.querySelectorAll('#case li');
             var oCase = document.querySelector('#case');
@@ -25,17 +53,53 @@
             var oMecon = document.querySelector('.mecon');
             var oWork = document.querySelector('.works');
             var oWidth = oAbout.offsetWidth;
+            var aLieb = document.querySelectorAll('.lieb');
+            var oHold = document.querySelector('#hold');
+            var aNav = document.querySelectorAll('.nav');
+            var aCaidan = document.querySelectorAll('.caidan');
+            var oCall = document.querySelector('.call');
+            var bodyH = document.body.scrollHeight;
+
+            console.log(bodyH);
+            // var aCall = oCall.children;
+            // console.log(aLieb);
             // console.log(oSkill);
             // var body = document.getElementById('body')
             oAbout.style.marginTop = oHead.offsetHeight + 'px';
             oAbout.style.height = (document.body.offsetHeight + oSkill.offsetHeight - 164) + 'px';
             // oWork.style.height = (document.body.offsetHeight + oCase.offsetHeight) + 'px';
-
             var top = oAbout.offsetTop;
-
             oSkill.style.width = (Math.floor(oWidth / 190) * 190) + 'px';
             // console.log(oWidth);
             // alert(1);
+            if (oWidth < 400) {
+                oCall.style.width = '170px';
+            } else {
+                oCall.style.width = '400px';
+            }
+            if (oWidth < 600) {
+                for (var i = 0; i < aLieb.length; i++) {
+                    aCaidan[i].style.display = 'block';
+                    aLieb[i].style.height = (aLieb[i].children.length * 31) + 'px';
+                    aLieb[i].style.display = 'block';
+                    aNav[i].style.display = 'none';
+                    // aLieb[i].style.bottom = '-' + (aLieb[i].children.length * 31) + 'px';
+                    // oAbout.style.paddingTop = aLieb[0].children.length * 31 + 'px';
+                }
+                oFmenu.style.height = (aLieb[0].children.length * 31 + 50) + 'px';
+                oTmenu.style.height = (aLieb[0].children.length * 31 + 50) + 'px';
+                oAbout.style.height = (document.body.offsetHeight + oSkill.offsetHeight - 164 + aLieb[0].children.length * 31) + 'px';
+                oWork.style.paddingBottom = '50px';
+            } else {
+                for (var i = 0; i < aLieb.length; i++) {
+                    aLieb[i].style.display = 'none';
+                    aNav[i].style.display = 'block';
+                    aCaidan[i].style.display = 'none';
+                }
+                oFmenu.style.height = 50 + 'px';
+                oTmenu.style.height = 50 + 'px';
+                oAbout.style.height = (document.body.offsetHeight + oSkill.offsetHeight - 164) + 'px';
+            }
             if (oWidth > 900) {
                 for (var i = 0; i < aCase.length; i++) {
                     // aCase[i].className = '';
@@ -47,12 +111,10 @@
                     aCase[i].style.width = (oWidth / 4) - 0.1 + 'px';
                     // 'calc(100 % / 4)';
                 }
-
             } else if (oWidth > 450) {
-
                 for (var i = 0; i < aCase.length; i++) {
                     // aCase[i].className = '';
-                    console.log(aCase);
+                    // console.log(aCase);
                     aCase[i].style.width = (oWidth / 3) - 0.1 + 'px';
                     // 'calc(100 % / 3)';
                 }
@@ -69,6 +131,8 @@
                 aCase[i].style.height = caseH + 'px';
             }
             // oMe.style.height = (top - 50) + 'px';
+            // gunlun
+            // addWheel(obj, fn);
             window.onresize = function() {
                 oWidth = oAbout.offsetWidth;
                 // var oSwidth = oSkill.offsetWidth;
@@ -77,6 +141,11 @@
                 oAbout.style.height = (document.body.offsetHeight + oSkill.offsetHeight - 164) + 'px';
                 oMecon.style.marginTop = (0 - oMecon.offsetHeight / 2) + 'px';
                 oMe.style.marginTop = (oMecon.offsetHeight / 2) + 'px';
+                if (oWidth < 400) {
+                    oCall.style.width = '170px';
+                } else {
+                    oCall.style.width = '400px';
+                }
                 if (oWidth > 900) {
                     for (var i = 0; i < aCase.length; i++) {
                         aCase[i].style.width = (oWidth / 6) - 0.1 + 'px';
@@ -101,17 +170,51 @@
                 // oWork.style.height = (document.body.offsetHeight + oCase.offsetHeight) + 'px';
                 // console.log(oCase)
                 // console.log(oCase.offsetHeight);
+                // if (oWidth < 600) {
+                //     for (var i = 0; i < aLieb.length; i++) {
+                //         aLieb[i].style.height = (aLieb[i].children.length * 31) + 'px';
+                //         aLieb[i].style.bottom = '-' + (aLieb[i].children.length * 31) + 'px';
+                //         oAbout.style.paddingTop = aLieb[0].children.length * 31 + 'px';
+                //     }
+                // }
+                if (oWidth < 600) {
+                    for (var i = 0; i < aLieb.length; i++) {
+                        aLieb[i].style.height = (aLieb[i].children.length * 31) + 'px';
+                        aLieb[i].style.display = 'block';
+                        aNav[i].style.display = 'none';
+                        aCaidan[i].style.display = 'block';
+                        // aLieb[i].style.bottom = '-' + (aLieb[i].children.length * 31) + 'px';
+                        // oAbout.style.paddingTop = aLieb[0].children.length * 31 + 'px';
+
+                    }
+                    oFmenu.style.height = (aLieb[0].children.length * 31 + 50) + 'px';
+                    oTmenu.style.height = (aLieb[0].children.length * 31 + 50) + 'px';
+                    oAbout.style.height = (document.body.offsetHeight + oSkill.offsetHeight - 164 + aLieb[0].children.length * 31) + 'px';
+                    oWork.style.paddingBottom = '50px';
+                } else {
+                    for (var i = 0; i < aLieb.length; i++) {
+                        aLieb[i].style.display = 'none';
+                        aNav[i].style.display = 'block';
+                        aCaidan[i].style.display = 'none';
+                    }
+                    oFmenu.style.height = 50 + 'px';
+                    oTmenu.style.height = 50 + 'px';
+                    oAbout.style.height = (document.body.offsetHeight + oSkill.offsetHeight - 164) + 'px';
+                }
+
             };
 
             window.onscroll = function() {
+
                 // top = oAbout.offsetTop;
                 var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-                console.log(scrollTop);
-                console.log(top);
+                // console.log(scrollTop);
+                // console.log(top);
                 // oHead.style.height = document.documentElement.clientHeight - scrollTop + 'px'
                 // oHead.style.marginTop = scrollTop + 'px'
                 // oAbout.style.marginTop = (top - scrollTop) + 'px'
                 if (scrollTop >= top) {
+
                     oHead.style.display = 'none';
                     oTmenu.style.position = 'fixed';
                     oTmenu.style.top = '0';
@@ -134,6 +237,10 @@
 <body>
     <!--加载动画-->
     <!--<div id="body">-->
+    <!--<div id="gdt" style="width: 5px; z-index: 10000; cursor: default; position: fixed; top: 0px; height: 100%; right: 0px; opacity: 1;">
+        <div style="position: relative; top: 603px; float: right; width: 5px; height: 114px; border: 0px solid rgb(255, 255, 255); border-radius: 0px; background-color: rgb(51, 51, 51); background-clip: padding-box;">
+        </div>
+    </div>-->
     <div class="yjz" id="loading">
         <div class="img1">
             <img src="images/loading.gif">
@@ -141,8 +248,7 @@
     </div>
     <!--加载动画-->
     <!--banna-->
-    <div id="head">
-
+    <div id="head" name="head">
         <ul class="ban">
             <li class="l1">
                 <div class="text">
@@ -192,11 +298,20 @@
                 <li><a href="#about">简历</a></li>
                 <!--target="_blank"-->
                 <li><a href="blog" target="_blank">博客</a></li>
-                <li class=""><a href="#me">关于</a></li>
+                <li><a href="#me">关于</a></li>
                 <li><a href="#works">案例</a></li>
                 <li><a href="#contact">联系</a></li>
             </ul>
+            <div class="caidan"></div>
         </div>
+        <ul class="lieb">
+            <li><a href="#about">简历</a></li>
+            <!--target="_blank"-->
+            <li><a href="blog" target="_blank">博客</a></li>
+            <li class=""><a href="#me">关于</a></li>
+            <li><a href="#works">案例</a></li>
+            <li><a href="#contact">联系</a></li>
+        </ul>
     </div>
     <!--关于我-->
     <div id="about" name="about">
@@ -211,14 +326,26 @@
                     <li><a href="#about">简历</a></li>
                     <!--target="_blank"-->
                     <li><a href="blog" target="_blank">博客</a></li>
-                    <li class=""><a href="#me">关于</a></li>
+                    <li><a href="#me">关于</a></li>
                     <li><a href="#works">案例</a></li>
                     <li><a href="#contact">联系</a></li>
                 </ul>
+                <div class="caidan"></div>
             </div>
+            <ul class="lieb">
+                <li><a href="#about">简历</a></li>
+                <!--target="_blank"-->
+                <li><a href="blog" target="_blank">博客</a></li>
+                <li class=""><a href="#me">关于</a></li>
+                <li><a href="#works">案例</a></li>
+                <li><a href="#contact">联系</a></li>
+            </ul>
         </div>
         <!--吸顶条结束-->
         <div class="about" id="me" name="me">
+            <div id="hold">
+
+            </div>
             <div class="mecon">
                 <h2>ABOUT ME</h2>
                 <h3>关于·我</h3>
@@ -396,13 +523,18 @@
             <div class="call clearfix">
                 <div class="left"><img src="images/wx.jpg" alt=""></div>
                 <div class="right">
-                    <p>fydy</p>
-                    <p>dytu</p>
-                    <p>fdhgh</p>
+                    <p>张翔:<br>18663053352</p>
+                    <p>邮箱:<br>x6002z@qq.com</p>
+                    <p>QQ:<br>1239576667</p>
                 </div>
             </div>
-            <a href="resume.html" target="_blank" class="resume">MORE</a>
         </div>
+    </div>
+    <footer>
+        <p>THANKS</p>
+        <a href="#" class="resume">返回顶部</a>
+    </footer>
+    <div class="bottom">
 
     </div>
 </body>
