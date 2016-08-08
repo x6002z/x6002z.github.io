@@ -190,7 +190,8 @@ window.onload = function() {
             }
         }
         // document.body.scrollTop + document.body.clientHeight + 75
-        if (document.body.scrollHeight > (oContact.offsetTop+oContact.offsetHeight)) {
+        // document.body.scrollHeight
+        if ((document.body.scrollTop + document.body.clientHeight) < (oContact.offsetTop + oContact.offsetHeight)) {
             oTop.style.bottom = '5px';
         } else {
             oTop.style.bottom = '70px';
