@@ -20,7 +20,8 @@ window.onload = function() {
     var oCall = document.querySelector('.call');
     var bodyH = document.body.scrollHeight;
     var oTop = document.querySelector('.top1');
-    console.log(bodyH);
+    var oContact = document.querySelector('#contact');
+    // console.log(bodyH);
     // var aCall = oCall.children;
     // console.log(aLieb);
     // console.log(oSkill);
@@ -188,7 +189,8 @@ window.onload = function() {
                 // oFmenu.style.display = 'block';
             }
         }
-        if (document.body.scrollHeight > (document.body.scrollTop + document.body.clientHeight + 75)) {
+        // document.body.scrollTop + document.body.clientHeight + 75
+        if (document.body.scrollHeight > (oContact.offsetTop+oContact.offsetHeight)) {
             oTop.style.bottom = '5px';
         } else {
             oTop.style.bottom = '70px';
