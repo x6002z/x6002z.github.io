@@ -1,4 +1,4 @@
-window.onload = function () {
+window.onload = function() {
     var oLoad = document.getElementById('loading');
     oLoad.style.display = 'none';
     var oTmenu = document.getElementById('tmenu');
@@ -93,7 +93,7 @@ window.onload = function () {
     // oMe.style.height = (top - 50) + 'px';
     // gunlun
     // addWheel(obj, fn);
-    window.onresize = function () {
+    window.onresize = function() {
         oWidth = oAbout.offsetWidth;
         // var oSwidth = oSkill.offsetWidth;
         // oWork.style.height = (document.body.offsetHeight + oCase.offsetHeight) + 'px';
@@ -164,7 +164,7 @@ window.onload = function () {
 
     };
 
-    window.onscroll = function () {
+    window.onscroll = function() {
 
         // top = oAbout.offsetTop;
         var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -174,7 +174,6 @@ window.onload = function () {
         // oHead.style.marginTop = scrollTop + 'px'
         // oAbout.style.marginTop = (top - scrollTop) + 'px'
         if (scrollTop >= top) {
-
             oHead.style.display = 'none';
             oTmenu.style.position = 'fixed';
             oTmenu.style.top = '0';
@@ -189,7 +188,7 @@ window.onload = function () {
                 // oFmenu.style.display = 'block';
             }
         }
-        if (document.body.scrollHeight > (document.body.scrollTop + document.body.clientHeight + 65)) {
+        if (document.body.scrollHeight > (document.body.scrollTop + document.body.clientHeight + 75)) {
             oTop.style.bottom = '5px';
         } else {
             oTop.style.bottom = '70px';
